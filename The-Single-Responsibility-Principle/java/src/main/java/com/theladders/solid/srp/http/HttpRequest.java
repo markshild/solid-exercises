@@ -23,4 +23,14 @@ public class HttpRequest
   {
     return parameters.get(key);
   }
+
+  public boolean resumeNotExist()
+  {
+    return "existing" != parameters.get("whichResume");
+  }
+
+  public String activateResume()
+  {
+    return "yes" == parameters.get("makeResumeActive");
+  }
 }

@@ -22,4 +22,9 @@ public enum ProfileStatus
     this.id = id;
     this.name = name;
   }
+  public boolean incomplete() {return this.name == "Incomplete" }
+
+  public boolean noProfile() {return this.name == "No Profile"" }
+
+  public boolean removed() {return this.name == "Removed" }
 }

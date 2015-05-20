@@ -46,8 +46,6 @@ public class ApplyController
                              HttpResponse response,
                              String origFileName)
   {
-    Jobseeker jobseeker = request.getSession().getJobseeker();
-    JobseekerProfile profile = jobseekerProfileManager.getJobSeekerProfile(jobseeker);
 
     String jobIdString = request.getParameter("jobId");
     int jobId = Integer.parseInt(jobIdString);
@@ -60,9 +58,12 @@ public class ApplyController
       return response;
     }
 
-    Map<String, Object> model = new HashMap<>();
+
 
     List<String> errList = new ArrayList<>();
+
+    Jobseeker jobseeker = request.getSession().getJobseeker();
+
 
     try
     {
@@ -75,12 +76,19 @@ public class ApplyController
       return response;
     }
 
-    model.put("jobId", job.getJobId());
-    model.put("jobTitle", job.getTitle());
+//    Map<String, Object> model = new HashMap<>();
+//
+//    model.put("jobId", job.getJobId());
+//    model.put("jobTitle", job.getTitle());
 
-    if (!jobseeker.isPremium() && (profile.getStatus().equals(ProfileStatus.INCOMPLETE) ||
-                                   profile.getStatus().equals(ProfileStatus.NO_PROFILE) ||
-                                   profile.getStatus().equals(ProfileStatus.REMOVED)))
+    Map<String, Object> model = new ModelJobBuilder.buildjob(job);
+
+//    JobseekerProfile profile = jobseekerProfileManager.getJobSeekerProfile(jobseeker);
+//
+//    if (!jobseeker.isPremium() && (profile.getStatus().equals(ProfileStatus.INCOMPLETE) ||
+//                                   profile.getStatus().equals(ProfileStatus.NO_PROFILE) ||
+//                                   profile.getStatus().equals(ProfileStatus.REMOVED)))
+    if (jobseeker.profileIncomplete(jobseekerProfileManager))
     {
       provideResumeCompletionView(response, model);
       return response;
@@ -114,7 +122,7 @@ public class ApplyController
                      Job job,
                      String fileName)
   {
-    Resume resume = saveNewOrRetrieveExistingResume(fileName,jobseeker, request);
+    Resume resume = resumeManager.saveNewOrRetrieveExistingResume(fileName,jobseeker, request, myResumeManager);
     UnprocessedApplication application = new UnprocessedApplication(jobseeker, job, resume);
     JobApplicationResult applicationResult = jobApplicationSystem.apply(application);
 
@@ -124,28 +132,28 @@ public class ApplyController
     }
   }
 
-  private Resume saveNewOrRetrieveExistingResume(String newResumeFileName,
-                                                 Jobseeker jobseeker,
-                                                 HttpRequest request)
-  {
-    Resume resume;
-
-    if (!"existing".equals(request.getParameter("whichResume")))
-    {
-      resume = resumeManager.saveResume(jobseeker, newResumeFileName);
-
-      if (resume != null && "yes".equals(request.getParameter("makeResumeActive")))
-      {
-        myResumeManager.saveAsActive(jobseeker, resume);
-      }
-    }
-    else
-    {
-      resume = myResumeManager.getActiveResume(jobseeker.getId());
-    }
-
-    return resume;
-  }
+//  private Resume saveNewOrRetrieveExistingResume(String newResumeFileName,
+//                                                 Jobseeker jobseeker,
+//                                                 HttpRequest request)
+//  {
+//    Resume resume;
+//
+//    if (!"existing".equals(request.getParameter("whichResume")))
+//    {
+//      resume = resumeManager.saveResume(jobseeker, newResumeFileName);
+//
+//      if (resume != null && "yes".equals(request.getParameter("makeResumeActive")))
+//      {
+//        myResumeManager.saveAsActive(jobseeker, resume);
+//      }
+//    }
+//    else
+//    {
+//      resume = myResumeManager.getActiveResume(jobseeker.getId());
+//    }
+//
+//    return resume;
+//  }
 
   private static void provideInvalidJobView(HttpResponse response, int jobId)
   {

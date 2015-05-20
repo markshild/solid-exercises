@@ -1,5 +1,9 @@
 package com.theladders.solid.srp.jobseeker;
 
+import com.theladders.solid.srp.jobseeker.JobseekerProfileManager;
+import com.theladders.solid.srp.jobseeker.JobseekerProfile;
+import com.theladders.solid.srp.jobseeker.Jobseeker;
+
 public class Jobseeker
 {
   private final int id;
@@ -28,6 +32,18 @@ public class Jobseeker
     int result = 1;
     result = prime * result + id;
     return result;
+  }
+
+  public boolean profileIncomplete(JobSeekerProfileManager jobSeekerProfileManager)
+  {
+    if (isPremium())
+      return false;
+
+    JobseekerProfile profile = jobseekerProfileManager.getJobSeekerProfile(this);
+
+    if (profile.incomplete() || profile.noProfile() || profile.removed())
+      return true;
+    return false;
   }
 
   @Override
