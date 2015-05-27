@@ -26,6 +26,15 @@ public class UnprocessedApplication
            resume    != null;
   }
 
+  public SuccessfulApplication toSuccessfulApplication()
+  {
+    SuccessfulApplication application = new SuccessfulApplication(jobseeker,
+                                                                  job,
+                                                                  resume);
+
+    return application;
+  }
+
   public Jobseeker getJobseeker()
   {
     return jobseeker;

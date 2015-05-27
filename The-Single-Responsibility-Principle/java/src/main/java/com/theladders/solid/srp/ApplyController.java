@@ -9,6 +9,7 @@ import com.theladders.solid.srp.http.HttpRequest;
 import com.theladders.solid.srp.http.HttpResponse;
 import com.theladders.solid.srp.job.Job;
 import com.theladders.solid.srp.job.JobSearchService;
+import com.theladders.solid.srp.job.ModelJobBuilder;
 import com.theladders.solid.srp.job.application.ApplicationFailureException;
 import com.theladders.solid.srp.job.application.JobApplicationResult;
 import com.theladders.solid.srp.job.application.JobApplicationSystem;
@@ -52,10 +53,11 @@ public class ApplyController
 
     Job job = jobSearchService.getJob(jobId);
 
+    ViewHandler viewHandler = new ViewHandler(response);
+
     if (job == null)
     {
-      provideInvalidJobView(response, jobId);
-      return response;
+      return viewHandler.provideInvalidJobView(jobId);
     }
 
 
@@ -64,6 +66,7 @@ public class ApplyController
 
     Jobseeker jobseeker = request.getSession().getJobseeker();
 
+    Map<String, Object> model = new ModelJobBuilder().buildModel(job);
 
     try
     {
@@ -72,49 +75,15 @@ public class ApplyController
     catch (Exception e)
     {
       errList.add("We could not process your application.");
-      provideErrorView(response, errList, model);
-      return response;
+      return viewHandler.provideErrorView(errList, model);
     }
 
-//    Map<String, Object> model = new HashMap<>();
-//
-//    model.put("jobId", job.getJobId());
-//    model.put("jobTitle", job.getTitle());
-
-    Map<String, Object> model = new ModelJobBuilder.buildjob(job);
-
-//    JobseekerProfile profile = jobseekerProfileManager.getJobSeekerProfile(jobseeker);
-//
-//    if (!jobseeker.isPremium() && (profile.getStatus().equals(ProfileStatus.INCOMPLETE) ||
-//                                   profile.getStatus().equals(ProfileStatus.NO_PROFILE) ||
-//                                   profile.getStatus().equals(ProfileStatus.REMOVED)))
     if (jobseeker.profileIncomplete(jobseekerProfileManager))
     {
-      provideResumeCompletionView(response, model);
-      return response;
+      return viewHandler.provideResumeCompletionView(model);
     }
 
-    provideApplySuccessView(response, model);
-
-    return response;
-  }
-
-  private static void provideApplySuccessView(HttpResponse response, Map<String, Object> model)
-  {
-    Result result = new Result("success", model);
-    response.setResult(result);
-  }
-
-  private static void provideResumeCompletionView(HttpResponse response, Map<String, Object> model)
-  {
-    Result result = new Result("completeResumePlease", model);
-    response.setResult(result);
-  }
-
-  private static void provideErrorView(HttpResponse response, List<String> errList, Map<String, Object> model)
-  {
-   Result result = new Result("error", model, errList);
-   response.setResult(result);
+    return viewHandler.provideApplySuccessView(model);
   }
 
   private void apply(HttpRequest request,
@@ -130,37 +99,5 @@ public class ApplyController
     {
       throw new ApplicationFailureException(applicationResult.toString());
     }
-  }
-
-//  private Resume saveNewOrRetrieveExistingResume(String newResumeFileName,
-//                                                 Jobseeker jobseeker,
-//                                                 HttpRequest request)
-//  {
-//    Resume resume;
-//
-//    if (!"existing".equals(request.getParameter("whichResume")))
-//    {
-//      resume = resumeManager.saveResume(jobseeker, newResumeFileName);
-//
-//      if (resume != null && "yes".equals(request.getParameter("makeResumeActive")))
-//      {
-//        myResumeManager.saveAsActive(jobseeker, resume);
-//      }
-//    }
-//    else
-//    {
-//      resume = myResumeManager.getActiveResume(jobseeker.getId());
-//    }
-//
-//    return resume;
-//  }
-
-  private static void provideInvalidJobView(HttpResponse response, int jobId)
-  {
-    Map<String, Object> model = new HashMap<>();
-    model.put("jobId", jobId);
-
-    Result result = new Result("invalidJob", model);
-    response.setResult(result);
   }
 }

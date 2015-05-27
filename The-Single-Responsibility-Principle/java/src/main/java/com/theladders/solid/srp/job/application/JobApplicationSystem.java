@@ -16,9 +16,7 @@ public class JobApplicationSystem
         !repository.applicationExistsFor(application.getJobseeker(), application.getJob()))
     {
 
-      SuccessfulApplication success = new SuccessfulApplication(application.getJobseeker(),
-                                                                application.getJob(),
-                                                                application.getResume());
+      SuccessfulApplication success = application.toSuccessfulApplication();
 
       repository.add(success);
 

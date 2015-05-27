@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: apache:taglibs-unstandard:1.0.N20051109">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/apache/taglibs-unstandard/1.0.N20051109/taglibs-unstandard-1.0.N20051109.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/apache/taglibs-unstandard/1.0.N20051109/taglibs-unstandard-1.0.N20051109-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/apache/taglibs-unstandard/1.0.N20051109/taglibs-unstandard-1.0.N20051109-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

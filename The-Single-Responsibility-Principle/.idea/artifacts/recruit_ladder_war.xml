@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="recruit-ladder:war">
+    <output-path>$USER_HOME$/workspace/recruit-ladder/target</output-path>
+    <root id="archive" name="ROOT.war">
+      <element id="artifact" artifact-name="recruit-ladder:war exploded" />
+    </root>
+  </artifact>
+</component>

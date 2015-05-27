@@ -34,12 +34,12 @@ public class Jobseeker
     return result;
   }
 
-  public boolean profileIncomplete(JobSeekerProfileManager jobSeekerProfileManager)
+  public boolean profileIncomplete(JobseekerProfileManager jobSeekerProfileManager)
   {
     if (isPremium())
       return false;
 
-    JobseekerProfile profile = jobseekerProfileManager.getJobSeekerProfile(this);
+    JobseekerProfile profile = jobSeekerProfileManager.getJobSeekerProfile(this);
 
     if (profile.incomplete() || profile.noProfile() || profile.removed())
       return true;

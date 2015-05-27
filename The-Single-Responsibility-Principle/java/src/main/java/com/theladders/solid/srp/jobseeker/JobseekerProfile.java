@@ -21,9 +21,9 @@ public class JobseekerProfile
     return id;
   }
 
-  public boolean incomplete() {return this.status.incomplete() }
+  public boolean incomplete() {return this.status.incomplete(); }
 
-  public boolean noProfile() {return this.status.noProfile() }
+  public boolean noProfile() {return this.status.noProfile(); }
 
-  public boolean removed() {return this.status.removed() }
+  public boolean removed() {return this.status.removed(); }
 }

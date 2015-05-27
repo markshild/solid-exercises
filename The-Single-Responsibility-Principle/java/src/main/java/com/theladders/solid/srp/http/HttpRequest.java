@@ -29,8 +29,8 @@ public class HttpRequest
     return "existing" != parameters.get("whichResume");
   }
 
-  public String activateResume()
+  public boolean activateResume()
   {
-    return "yes" == parameters.get("makeResumeActive");
+    return parameters.get("makeResumeActive") == "yes";
   }
 }

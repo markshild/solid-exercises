@@ -11,7 +11,6 @@ public class ModelJobBuilder
 
   public ModelJobBuilder()
   {
-    this.model = model;
   }
 
   public Map<String, Object> buildModel(Job job)

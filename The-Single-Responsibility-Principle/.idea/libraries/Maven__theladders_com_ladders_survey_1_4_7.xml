@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: theladders.com:ladders-survey:1.4.7">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/theladders/com/ladders-survey/1.4.7/ladders-survey-1.4.7.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/theladders/com/ladders-survey/1.4.7/ladders-survey-1.4.7-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/theladders/com/ladders-survey/1.4.7/ladders-survey-1.4.7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

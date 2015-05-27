@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.theladders.spring:ladders-spring-extensions:1.0">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/theladders/spring/ladders-spring-extensions/1.0/ladders-spring-extensions-1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/theladders/spring/ladders-spring-extensions/1.0/ladders-spring-extensions-1.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/theladders/spring/ladders-spring-extensions/1.0/ladders-spring-extensions-1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
