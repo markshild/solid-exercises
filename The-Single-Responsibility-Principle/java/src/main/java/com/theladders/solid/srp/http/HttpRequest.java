@@ -24,6 +24,12 @@ public class HttpRequest
     return parameters.get(key);
   }
 
+  public int getJobId()
+  {
+    String stringId = parameters.get("jobId");
+    return Integer.parseInt(stringId);
+  }
+
   public boolean resumeNotExist()
   {
     return "existing" != parameters.get("whichResume");

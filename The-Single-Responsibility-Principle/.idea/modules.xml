@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/The-Single-Responsibility-Principle.iml" filepath="$PROJECT_DIR$/.idea/The-Single-Responsibility-Principle.iml" />
-      <module fileurl="file://$USER_HOME$/workspace/recruit-ladder/recruit-ladder.iml" filepath="$USER_HOME$/workspace/recruit-ladder/recruit-ladder.iml" />
       <module fileurl="file://$PROJECT_DIR$/java/solid-srp.iml" filepath="$PROJECT_DIR$/java/solid-srp.iml" />
     </modules>
   </component>

@@ -290,8 +290,9 @@ public class TestIt
   {
     JobseekerProfileManager jobseekerProfileManager = new JobseekerProfileManager(jobseekerProfileRepository);
     JobSearchService jobSearchService = new JobSearchService(jobRepository);
-    JobApplicationSystem jobApplicationSystem = new JobApplicationSystem(jobApplicationRepository);
     ResumeManager resumeManager = new ResumeManager(resumeRepository);
+    JobApplicationSystem jobApplicationSystem = new JobApplicationSystem(jobApplicationRepository, resumeManager);
+
     MyResumeManager myResumeManager = new MyResumeManager(activeResumeRepository);
 
     controller = new ApplyController(jobseekerProfileManager,

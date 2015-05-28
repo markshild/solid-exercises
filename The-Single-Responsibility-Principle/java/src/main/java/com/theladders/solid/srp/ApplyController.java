@@ -48,8 +48,7 @@ public class ApplyController
                              String origFileName)
   {
 
-    String jobIdString = request.getParameter("jobId");
-    int jobId = Integer.parseInt(jobIdString);
+    int jobId = request.getJobId();
 
     Job job = jobSearchService.getJob(jobId);
 
@@ -62,7 +61,7 @@ public class ApplyController
 
 
 
-    List<String> errList = new ArrayList<>();
+    ErrorList errList = new ErrorList();
 
     Jobseeker jobseeker = request.getSession().getJobseeker();
 
@@ -70,11 +69,11 @@ public class ApplyController
 
     try
     {
-      apply(request, jobseeker, job, origFileName);
+      jobApplicationSystem.apply(request, jobseeker, job, origFileName, myResumeManager);
     }
     catch (Exception e)
     {
-      errList.add("We could not process your application.");
+      errList.addApplicationError();
       return viewHandler.provideErrorView(errList, model);
     }
 
@@ -86,18 +85,4 @@ public class ApplyController
     return viewHandler.provideApplySuccessView(model);
   }
 
-  private void apply(HttpRequest request,
-                     Jobseeker jobseeker,
-                     Job job,
-                     String fileName)
-  {
-    Resume resume = resumeManager.saveNewOrRetrieveExistingResume(fileName,jobseeker, request, myResumeManager);
-    UnprocessedApplication application = new UnprocessedApplication(jobseeker, job, resume);
-    JobApplicationResult applicationResult = jobApplicationSystem.apply(application);
-
-    if (applicationResult.failure())
-    {
-      throw new ApplicationFailureException(applicationResult.toString());
-    }
-  }
 }

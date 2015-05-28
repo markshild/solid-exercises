@@ -30,9 +30,9 @@ public class ViewHandler
     return response;
   }
 
-  public HttpResponse provideErrorView(List<String> errList, Map<String, Object> model)
+  public HttpResponse provideErrorView(ErrorList errList, Map<String, Object> model)
   {
-    Result result = new Result("error", model, errList);
+    Result result = new Result("error", model, errList.toList());
     response.setResult(result);
     return response;
   }
